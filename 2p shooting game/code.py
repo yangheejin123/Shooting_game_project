@@ -16,7 +16,7 @@ WIDTH = 1000
 HEIGHT = 700
 FPS = 1400
 
-shieldWIDHT = 120
+shieldWIDHT = 120 
 shieldHEIGHT = 10
 enemy_shieldWIDTH = 40
 enemy_shieldHEIGHT = 10
@@ -117,7 +117,7 @@ boss_die_sound=pygame.mixer.Sound('boss_die.wav')
 
 
 ############ 클래스 선언 ############
-# class Player 작성자:
+# class Player 작성자: 노다민
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, image):
         pygame.sprite.Sprite.__init__(self)
@@ -229,7 +229,7 @@ class Player(pygame.sprite.Sprite):
             item3_bullets.add(bullet_item3)
             item3_shooting_sound.play()
 
-# class Bullet 작성자:
+# class Bullet 작성자: 노다민
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, type):
         pygame.sprite.Sprite.__init__(self)
@@ -257,7 +257,7 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.y < -100 or self.rect.y > HEIGHT + 100:
             self.kill()
 
-# class Enemy 작성자:
+# class Enemy 작성자: 심지연
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, level):
         pygame.sprite.Sprite.__init__(self)
@@ -360,7 +360,7 @@ class Enemy(pygame.sprite.Sprite):
                 all_sprites.add(enemy_bullet3)
                 enemy_bullets.add(enemy_bullet3)
 
-# class Enemy_Bullet 작성자:
+# class Enemy_Bullet 작성자: 심지연
 class Enemy_Bullet(pygame.sprite.Sprite):
     def __init__(self, speedx, speedy, x, y, bullet_speed):
         pygame.sprite.Sprite.__init__(self)
@@ -384,7 +384,7 @@ class Enemy_Bullet(pygame.sprite.Sprite):
         if self.rect.x < 0 or self.rect.x > WIDTH:
             self.kill()
 
-# class Item 작성자:
+# class Item 작성자: 노다민       
 class Item(pygame.sprite.Sprite):
     def __init__(self, center):
         pygame.sprite.Sprite.__init__(self)
@@ -399,7 +399,7 @@ class Item(pygame.sprite.Sprite):
         if self.rect.y < -100 or self.rect.y > HEIGHT + 100:
             self.kill()
 
-# class Boss 작성자:
+# class Boss 작성자: 양희진
 class Boss(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -432,7 +432,7 @@ class Boss(pygame.sprite.Sprite):
             all_sprites.add(boss_bullet)
             boss_bullets.add(boss_bullet)
 
-# class Boss_Bullet 작성자:
+# class Boss_Bullet 작성자: 양희진
 class Boss_Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -449,7 +449,7 @@ class Boss_Bullet(pygame.sprite.Sprite):
 
 ############ 함수 선언 ############
 ##1. 데이터베이스 함수
-# def DB_insert 작성자:
+# def DB_insert 작성자: 노다민
 def DB_insert(id, score):
     DB_id = id
     DB_score = score
@@ -457,7 +457,7 @@ def DB_insert(id, score):
     cur.execute(sql)
     con.commit()
 
-# def DB_check 작성자:
+# def DB_check 작성자: 노다민
 def DB_check():
     cur.execute("SELECT id, score FROM scoreTable ORDER BY CAST (score AS INTEGER) DESC")
     con.commit()
@@ -473,7 +473,7 @@ def DB_check():
         draw_text(screen, str(DB_id), 30, WIDTH / 2 - 80, 200 + i * 35, BLACK)
         draw_text(screen, str(DB_score), 30, WIDTH / 2 + 160, 200 + i * 35, BLACK)
 
-# def DB_inputdata 작성자:
+# def DB_inputdata 작성자: 
 def DB_inputdata():
     global screen
     screen.blit(saveranking_img, (0, 0))
@@ -521,7 +521,7 @@ def DB_inputdata():
         clock.tick(30)
 
 ##2. draw 함수
-# def draw_HP 작성자:
+# def draw_HP 작성자: 양희진
 def draw_HP(surf, x, y, HP, color):
     HP = max(HP, 0)
     fill = (HP / 100) * shieldWIDHT
@@ -530,7 +530,7 @@ def draw_HP(surf, x, y, HP, color):
     pygame.draw.rect(surf, color, fill_rect)
     pygame.draw.rect(surf, BLACK, outline_rect, 2)
 
-# def draw_inventory 작성자:
+# def draw_inventory 작성자: 노다민
 def draw_inventory(p1_inventory_key, p2_inventory_key):
     inventoryWIDTH = shieldWIDHT / 3
     for i in range (0, 3):
@@ -553,7 +553,7 @@ def draw_inventory(p1_inventory_key, p2_inventory_key):
         outline_rect2 = pygame.Rect(865 + inventoryWIDTH * i, HEIGHT - 55, inventoryWIDTH, inventoryWIDTH)  # 인벤토리 3칸 그리기
         pygame.draw.rect(screen, color, outline_rect2, size)
 
-# def draw_text 작성자:
+# def draw_text 작성자: 양희진
 def draw_text(surf, text, size, x, y, color):
     if color == BLACK:
         font = pygame.font.Font(font_name, size)
@@ -564,7 +564,7 @@ def draw_text(surf, text, size, x, y, color):
     text_rect.midtop = (x, y)
     surf.blit(text_surface, text_rect)
 
-# def draw_lives 작성자:
+# def draw_lives 작성자: 심지연
 def draw_lives(surf, x, lives, image):
     for i in range(lives):
         img_rect = image.get_rect()
@@ -572,7 +572,7 @@ def draw_lives(surf, x, lives, image):
         img_rect.y = 35
         surf.blit(image, img_rect)
 
-# def draw_item 작성자:
+# def draw_item 작성자: 심지연
 def draw_item(item1, item2, item3, x, y):
     if item1 > 0:
         item1_img = items_set['item1']
@@ -595,7 +595,7 @@ def draw_item(item1, item2, item3, x, y):
         item3_img_rect.y = y + 5
         screen.blit(item3_img, item3_img_rect)
 
-# def draw_button 작성자:
+# def draw_button 작성자: 
 def draw_button(image, x, y):
     image_rect = image.get_rect()
     if x == 0: # x값이 0이면 중앙에 출력
@@ -604,14 +604,14 @@ def draw_button(image, x, y):
         screen.blit(image, (x, y))
 
 ##3.적 생성 함수
-# def make_new_enemy 작성자:
+# def make_new_enemy 작성자: 노다민
 def make_new_enemy(level):
     enemy_element = Enemy(level)
     all_sprites.add(enemy_element)
     enemys.add(enemy_element)
 
 ##4. 충돌 감지 함수
-# def collide 작성자:
+# def collide 작성자: 노다민
 def collide(mouseX, mouseY, rect, y): #중앙에 위치한 버튼 클릭 확인용
     rectX = WIDTH / 2 - rect.width / 2
 
@@ -620,7 +620,7 @@ def collide(mouseX, mouseY, rect, y): #중앙에 위치한 버튼 클릭 확인�
     else:
         return False
 
-# def collideXY 작성자:
+# def collideXY 작성자: 노다민
 def collideXY(mouseX, mouseY, rect, x, y): #중앙에 위치하지 않은 버튼 클릭 확인용
     rectX = WIDTH / 2 - rect.width / 2
 
@@ -630,7 +630,7 @@ def collideXY(mouseX, mouseY, rect, x, y): #중앙에 위치하지 않은 버튼
         return False
 
 ##5. 메뉴 관련 함수
-# def main_menu 작성자:
+# def main_menu 작성자: 노다민
 def main_menu():
     global screen
 
@@ -664,7 +664,7 @@ def main_menu():
                 pygame.quit()
                 quit()
 
-# def manual 작성자:
+# def manual 작성자: 양희진
 def manual():
     global screen
     manual_img = manual_img1
@@ -710,7 +710,7 @@ def manual():
         pygame.display.flip()
         clock.tick(10)
 
-# def ranking 작성자:
+# def ranking 작성자: 노다민
 def ranking():
     global screen
     screen.blit(ranking_img, (0, 0))
@@ -732,7 +732,7 @@ def ranking():
                 pygame.quit()
                 quit()
 
-# def saveranking 작성자:
+# def saveranking 작성자: 노다민
 def saveranking(score):
     global screen
     screen.blit(saveranking_img, (0, 0))
@@ -756,7 +756,7 @@ def saveranking(score):
                 pygame.quit()
                 quit()
 
-# def gameover 작성자:
+# def gameover 작성자: 심지연
 def gameover(time):
     global screen
 
@@ -772,7 +772,7 @@ def gameover(time):
                 pygame.quit()
                 quit()
 
-# def nextlevel 작성자:
+# def nextlevel 작성자: 양희진
 def nextlevel(time, level):
     global screen
 
@@ -789,7 +789,7 @@ def nextlevel(time, level):
                 pygame.quit()
                 quit()
 
-# def endingCredit 작성자:
+# def endingCredit 작성자: 노다민
 def endingCredit(time):
     global screen
 
@@ -814,7 +814,7 @@ def endingCredit(time):
         pygame.display.flip()
         clock.tick(60)
 
-# def choose_character 작성자:
+# def choose_character 작성자: 
 def choose_character():
     global screen
     screen.blit(chooseCharacter_img, (0,0))
